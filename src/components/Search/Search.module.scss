@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.modal {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    // border: 2px solid grey;
+    padding: 20px;
+    border-radius: 20px;
+
+    input {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        color: #333;
+        outline: none;
+        background-image: url("../../../public/img/geo.png");
+        background-repeat: no-repeat;
+        background-size: 18px 18px;
+        background-position: 8px center;
+        padding-left: 30px;
+        box-shadow: 0px 0px 10px 6px rgba(99, 97, 97, 0.5);
+        transition: 0.3s;
+        
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 10px 6px rgba(24, 117, 210, 0.5);
+        }
+    }
+
+    input::placeholder {
+        color: #999;
+        opacity: 0;
+    }
+}
