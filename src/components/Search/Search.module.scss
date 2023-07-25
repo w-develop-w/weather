@@ -54,7 +54,7 @@
 
             li {
                 .card {
-                    height: 130px;
+                    height: 150px;
                     width: 80px;
                     display: flex;
                     flex-direction: column;
@@ -65,6 +65,7 @@
                     border-radius: 10px;
                     box-shadow: 0px 0px 10px 6px rgba(99, 97, 97, 0.5);
                     transition: 0.3s;
+                    
 
                     &:hover {
                         box-shadow: 0px 0px 10px 6px rgba(24, 117, 210, 0.5);
