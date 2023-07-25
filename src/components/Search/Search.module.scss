@@ -6,14 +6,16 @@
 }
 
 .modal {
+
     font-family: "Nunito", sans-serif;
     font-weight: 700;
     // border: 2px solid grey;
     padding: 20px;
     border-radius: 20px;
-
+    max-width: 620px;
     input {
-        width: 300px;
+        margin-bottom: 20px;
+        width: 580px;
         padding: 10px;
         font-size: 16px;
         border: none;
@@ -28,7 +30,7 @@
         padding-left: 30px;
         box-shadow: 0px 0px 10px 6px rgba(99, 97, 97, 0.5);
         transition: 0.3s;
-        
+
         &:hover {
             cursor: pointer;
             box-shadow: 0px 0px 10px 6px rgba(24, 117, 210, 0.5);
@@ -37,6 +39,53 @@
 
     input::placeholder {
         color: #999;
-        opacity: 0;
+    }
+
+    .listDays {
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+
+            li {
+                .card {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    padding: 20px;
+                    background-color: #e6e5e5;
+                    border-radius: 10px;
+                    box-shadow: 0px 0px 10px 6px rgba(99, 97, 97, 0.5);
+
+                    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+                    transition: 0.3s;
+
+                    &:hover {
+                        box-shadow: 0px 0px 10px 6px rgba(24, 117, 210, 0.5);
+
+                        // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+                    }
+
+                    h2 {
+                        font-size: 15px;
+                        margin: 0;
+                    }
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                    }
+
+                    h3 {
+                        font-size: 15px;
+                        margin: 10px 0 0;
+                    }
+                }
+            }
+        }
     }
 }
