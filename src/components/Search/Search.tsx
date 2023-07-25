@@ -7,66 +7,69 @@ const api = {
 };
 
 type WeatherData = {
-  main: {
-    temp: string;
-  };
-  name: string;
-  weather: Array<{
-    main: string;
-    icon: string;
+  list: Array<{
+    main: {
+      temp: number;
+    };
+    weather: Array<{
+      main: string;
+      icon: string;
+    }>;
+    dt_txt: string;
   }>;
+  city: {
+    name: string;
+  };
 };
 
 export function Search() {
   const [search, setSearch] = useState("");
   const [weather, setWeather] = useState<WeatherData>({
-    main: { temp: "" },
-    name: "",
-    weather: [],
+    list: [],
+    city: { name: "" },
   });
 
   const getWeatherIconUrl = (main: string): string => {
     if (main === "Sunny" || main === "Clear") {
-      return "img/2.png";
-    } 
+        return "img/2.png"
+    }
     if (main === "Clouds") {
-      return "img/3.png";
-    } 
+        return "img/3.png"
+    }
     if (main === "Rain" || main === "Drizzle") {
-      return "img/5.png";
-    } 
+        return "img/5.png"
+    }
     if (main === "Snow") {
-      return "img/7.png";
-    } 
+        return "img/7.png"
+    }
     if (main === "Thunderstorm") {
-      return "img/8.png";
-    } 
+        return "img/8.png"
+    }
     if (main === "Mist" || main === "Fog") {
-      return "img/9.png";
-    } 
+        return "img/9.png"
+    }
     if (main === "Smoke") {
-      return "img/10.png";
-    } 
+        return "img/10.png"
+    }
     if (main === "Haze") {
-      return "img/11.png";
-    } 
+        return "img/11.png"
+    }
     if (main === "Dust") {
-      return "img/12.png";
-    } 
+        return "img/12.png"
+    }
     if (main === "Sand") {
-      return "img/13.png";
-    } 
+        return "img/13.png"
+    }
     if (main === "Tornado") {
-      return "img/14.png";
-    } 
-    else {
-      // Возвращаем URL по умолчанию для других значений
-      return "http://openweathermap.org/img/wn/default.png";
+        return "img/14.png"
+    } else {
+        // Возвращаем URL по умолчанию для других значений
+        return "http://openweathermap.org/img/wn/default.png"
     }
   };
 
   const searchPressed = () => {
-    fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
+    fetch(`${api.base}forecast?q=${search}&units=metric&APPID=${api.key}&cnt=7`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("City not found");
@@ -74,7 +77,6 @@ export function Search() {
         return res.json();
       })
       .then((result) => {
-        console.log(result)
         setWeather(result);
       })
       .catch((error) => {
@@ -89,11 +91,21 @@ export function Search() {
         // Вызываем searchPressed только если search не пустая строка
         searchPressed();
       }
-    }, 500); // Задержка в 500 миллисекунд (0.5 секунды)
+    }, 1000); // Задержка в 1000 миллисекунд (1 секунда)
 
     return () => clearTimeout(delayDebounceFn);
   }, [search]);
 
+
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+        weekday: "short",
+        day: "numeric",
+        month: "numeric",
+        };
+        return date.toLocaleDateString("en-US", options);
+    };
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
@@ -105,19 +117,24 @@ export function Search() {
         />
         <div className={styles.listDays}>
           <ul>
-            <li>
-              <div className={styles.card}>
-                <img
-                  src={getWeatherIconUrl(weather.weather?.[0]?.main)}
-                  alt=""
-                />
-                <h3>{Math.ceil(Number(weather.main?.temp))}°</h3>
-                <h3>{weather.name}</h3>
-              </div>
-            </li>
+            {weather.list.map((item, index) => (
+              <li key={index}>
+                <div className={styles.card}>
+                  <h3 className={styles.date}>{formatDate(item.dt_txt)}</h3>
+                  <img
+                    src={getWeatherIconUrl(item.weather?.[0]?.main)}
+                    alt="Icon of weather"
+                  />
+                  <h3>{Math.ceil(Number(item.main?.temp))}°</h3>
+                  <h3>{weather.city.name}</h3>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
     </div>
   );
 }
+
+
