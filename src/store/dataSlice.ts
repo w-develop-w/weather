@@ -1,15 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+interface DataOfWeather {
+    search: string;
+}
 
-const dataOfBarbershopSlice = createSlice({
-    name: "dataOfBarbershop",
+const initialState: DataOfWeather = {
+    search: ""
+}
+
+const dataOfWeatherSlice = createSlice({
+    name: "dataOfWeather",
     initialState,
     reducers: {
-        setAllServices: (state, action: PayloadAction<Service[]>) => {
-            state.allServices = action.payload
+        setSearch: (state, action) => {
+            state.search = action.payload
         }
     },
 })
 
-export const { setAllServices } = dataOfBarbershopSlice.actions
-export default dataOfBarbershopSlice.reducer
+export const { setSearch } = dataOfWeatherSlice.actions
+export default dataOfWeatherSlice.reducer
