@@ -1,4 +1,5 @@
-export interface WeatherData {
+
+export type WeatherData = {
     list: Array<{
         main: {
             temp: number
@@ -12,4 +13,9 @@ export interface WeatherData {
     city: {
         name: string
     }
+}
+
+
+export type DataOfWeather = {
+    search: string;
 }
