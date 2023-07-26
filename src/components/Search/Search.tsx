@@ -10,11 +10,11 @@ export function Search() {
     const dispatch = useAppDispatch();
     const search = useAppSelector(state => state.dataOfWeather.search)
 
-    console.log("dataOfWeather.search:", search);
+    // console.log("dataOfWeather.search:", search);
 
-    // const { data, error, isFetching } = useGetWeatherQuery(dataOfWeather.search, {
-    //     refetchOnMountOrArgChange: dataOfWeather.search !== "",
-    // });
+    const { data, error, isFetching } = useGetWeatherQuery(search, {
+        refetchOnMountOrArgChange: search !== "",
+    });
 
     const getWeatherIconUrl = (main: string): string => {
         if (main === "Sunny" || main === "Clear") {
@@ -53,15 +53,15 @@ export function Search() {
         return "img/3.png";
     };
 
-    // const formatDate = (dateString: string): string => {
-    //     const date = new Date(dateString);
-    //     const options: Intl.DateTimeFormatOptions = {
-    //         weekday: "short",
-    //         day: "numeric",
-    //         month: "numeric",
-    //     };
-    //     return date.toLocaleDateString("en-US", options);
-    // };
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: "short",
+            day: "numeric",
+            month: "numeric",
+        };
+        return date.toLocaleDateString("en-US", options);
+    };
 
     return (
         <div className={styles.container}>
@@ -76,7 +76,7 @@ export function Search() {
                 <div className={styles.listDays}>
                     {/* {isFetching && <p>Loading...</p>} */}
                     {/* {error && <p>Error: {error.message}</p>} */}
-                    {/* <ul>
+                    <ul>
                         {data?.list.map((item, index) => (
                             <li key={index}>
                                 <div className={styles.card}>
@@ -90,7 +90,7 @@ export function Search() {
                                 </div>
                             </li>
                         ))}
-                    </ul> */}
+                    </ul>
                 </div>
             </div>
         </div>
